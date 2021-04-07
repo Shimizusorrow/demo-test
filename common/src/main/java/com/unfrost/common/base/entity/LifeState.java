@@ -14,7 +14,7 @@ public enum LifeState {
     FREEZING("冻结状态"),
     STOPPED("停止状态");
 
-    private String chinese;
+    private final String chinese;
 
     LifeState(String chinese) {
         this.chinese = chinese;

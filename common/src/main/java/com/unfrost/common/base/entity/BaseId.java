@@ -10,7 +10,9 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * 基础Id
@@ -20,7 +22,7 @@ import java.util.Objects;
  * @date 2021-04-07 14:45
  */
 @MappedSuperclass
-public abstract class BaseId {
+public class BaseId implements Serializable {
     @Id
     @GenericGenerator(name = "baseIdGenerator", strategy = "uuid")
     @GeneratedValue(generator = "baseIdGenerator")
@@ -49,5 +51,13 @@ public abstract class BaseId {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public BaseId(String id) {
+        this.id = id;
+    }
+
+    public BaseId() {
+        this.id = UUID.randomUUID().toString();
     }
 }

@@ -89,4 +89,12 @@ public class BaseEntity extends BaseId {
     public void setChangeCondition(boolean changeCondition) {
         this.changeCondition = changeCondition;
     }
+
+    public BaseEntity(String id) {
+        super(id);
+    }
+
+    public BaseEntity() {
+        super();
+    }
 }
