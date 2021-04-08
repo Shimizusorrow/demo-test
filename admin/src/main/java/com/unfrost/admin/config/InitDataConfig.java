@@ -8,6 +8,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * 初始化数据
+ *
  * @author Shimizu
  * @description
  * @date 2021-04-08 14:33
