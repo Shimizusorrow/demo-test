@@ -1,8 +1,10 @@
 package com.unfrost.admin.domain;
 
+import cn.hutool.core.util.StrUtil;
 import com.unfrost.admin.enums.GenderEnum;
 import com.unfrost.admin.enums.RoleEnum;
 import com.unfrost.common.base.entity.BaseEntity;
+import com.unfrost.common.exception.BusinessException;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -41,14 +43,38 @@ public class User extends BaseEntity {
     private GenderEnum gender;
 
     @ApiModelProperty("邮箱")
-    private String email;
+    private String email = "";
 
     public void setName(String name) {
-
+        if (StrUtil.containsBlank(name)) {
+            throw new BusinessException("名称不许带空格");
+        }
         this.name = name;
     }
 
     public void setUsername(String username) {
-        this.username = username.trim();
+        if (StrUtil.containsBlank(username)) {
+            throw new BusinessException("账号不许带空格");
+        }
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        if (StrUtil.containsBlank(password)) {
+            throw new BusinessException("密码不允许为空");
+        }
+    }
+
+    public static User initAdmin() {
+        return new User("清水忧", "admin", "1", RoleEnum.SUPER_ADMIN, GenderEnum.MALE, "1047791704@qq.com");
+    }
+
+    public User(String name, String username, String password, RoleEnum role, GenderEnum gender, String email) {
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.gender = gender;
+        this.email = email;
     }
 }
