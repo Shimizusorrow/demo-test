@@ -12,4 +12,6 @@ server:
   port: 8090
   servlet:
     context-path: /admin
+    session:
+      timeout: 60s
 
