@@ -97,4 +97,8 @@ public class BaseEntity extends BaseId {
     public BaseEntity() {
         super();
     }
+
+    public boolean isRunning() {
+        return LifeState.RUNNING.equals(lifeState);
+    }
 }

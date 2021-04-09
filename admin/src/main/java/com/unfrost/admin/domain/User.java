@@ -41,6 +41,7 @@ public class User extends BaseEntity implements UserDetails {
     private String password;
 
     @ApiModelProperty("权限")
+    @Enumerated(EnumType.STRING)
     private RoleEnum role;
 
     @ApiModelProperty("性别")

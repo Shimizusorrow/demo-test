@@ -1,5 +1,6 @@
 package com.unfrost.admin.service;
 
+import com.unfrost.admin.domain.User;
 import com.unfrost.admin.repo.UserRepo;
 import com.unfrost.common.exception.BusinessException;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,10 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        return userRepo.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("用户不存在!"));
+        User user = userRepo.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("用户不存在!"));
+        if (!user.isRunning()) {
+            throw new BusinessException(String.format("[%s]：用户已注销!", username));
+        }
+        return user;
     }
 }
