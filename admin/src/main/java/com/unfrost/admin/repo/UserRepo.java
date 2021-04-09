@@ -4,6 +4,8 @@ import com.unfrost.admin.domain.User;
 import com.unfrost.admin.enums.RoleEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 /**
  * @author Shimizu
  * @description
@@ -17,4 +19,12 @@ public interface UserRepo extends JpaRepository<User, String> {
      * @return
      */
     boolean existsByRole(RoleEnum role);
+
+    /**
+     * 查询账户
+     *
+     * @param username
+     * @return
+     */
+    Optional<User> findByUsername(String username);
 }

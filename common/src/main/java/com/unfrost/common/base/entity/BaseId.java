@@ -24,7 +24,7 @@ import java.util.UUID;
 @MappedSuperclass
 public class BaseId implements Serializable {
     @Id
-    @GenericGenerator(name = "baseIdGenerator", strategy = "uuid")
+    @GenericGenerator(name = "baseIdGenerator", strategy = "org.hibernate.id.UUIDGenerator")
     @GeneratedValue(generator = "baseIdGenerator")
     @Column(length = 40)
     private String id;
