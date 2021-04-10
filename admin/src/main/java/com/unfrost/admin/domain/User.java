@@ -1,6 +1,7 @@
 package com.unfrost.admin.domain;
 
 import cn.hutool.core.util.StrUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.unfrost.admin.enums.GenderEnum;
 import com.unfrost.admin.enums.RoleEnum;
 import com.unfrost.admin.utils.PasswordEncoderUtils;
@@ -39,6 +40,7 @@ public class User extends BaseEntity implements UserDetails {
     private String username;
 
     @ApiModelProperty("密码")
+    @JsonIgnore
     private String password;
 
     @ApiModelProperty("权限")
@@ -121,6 +123,8 @@ public class User extends BaseEntity implements UserDetails {
         if (StrUtil.containsBlank(password)) {
             throw new BusinessException("密码不允许为空");
         }
+        this.password = PasswordEncoderUtils.getInstanceEncoder()
+                .encode(password);
     }
 
     public static User initAdmin() {
