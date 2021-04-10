@@ -5,6 +5,7 @@ import com.unfrost.admin.enums.GenderEnum;
 import com.unfrost.admin.enums.RoleEnum;
 import com.unfrost.admin.utils.PasswordEncoderUtils;
 import com.unfrost.common.base.entity.BaseEntity;
+import com.unfrost.common.base.entity.LifeState;
 import com.unfrost.common.exception.BusinessException;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -51,6 +52,57 @@ public class User extends BaseEntity implements UserDetails {
     @ApiModelProperty("邮箱")
     private String email = "";
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    /**
+     * 更新
+     */
+    public User(String name, String password, RoleEnum role, GenderEnum gender, String email) {
+        setName(name);
+        setPassword(password);
+        setEmail(email);
+        this.role = role;
+        this.gender = gender;
+    }
+
+    /**
+     * 新增
+     */
+    public User(String name, String username, String password, RoleEnum role, GenderEnum gender, String email) {
+        this(name, password, role, gender, email);
+        setUsername(username);
+    }
+
+    public void setEmail(String email) {
+        if (StrUtil.containsBlank(email)) {
+            throw new BusinessException("邮箱中带有空格");
+        }
+        this.email = email;
+    }
+
     public void setName(String name) {
         if (StrUtil.containsBlank(name)) {
             throw new BusinessException("名称不许带空格");
@@ -76,37 +128,33 @@ public class User extends BaseEntity implements UserDetails {
                 .encode("1"), RoleEnum.SUPER_ADMIN, GenderEnum.MALE, "1047791704@qq.com");
     }
 
-    public User(String name, String username, String password, RoleEnum role, GenderEnum gender, String email) {
-        this.name = name;
-        this.username = username;
-        this.password = password;
-        this.role = role;
-        this.gender = gender;
-        this.email = email;
+    /**
+     * 删除用户
+     */
+    public void del() {
+        this.beStopped();
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+    /**
+     * 新增用户
+     *
+     * @param addUserVO 新增用户值对象
+     * @param role      权限
+     */
+    public User(AddUserVO addUserVO, RoleEnum role) {
+        this(addUserVO.getName(), addUserVO.getUsername(), addUserVO.getPassword(), role, addUserVO.getGender(), addUserVO.getEmail());
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
+    /**
+     * 更新用户
+     *
+     * @param updateUserVO
+     * @param role
+     */
+    public User(UpdateUserVO updateUserVO, RoleEnum role) {
+        this(updateUserVO.getName(), updateUserVO.getPassword(), role, updateUserVO.getGender(), updateUserVO.getEmail());
+        this.setId(updateUserVO.getId());
     }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }

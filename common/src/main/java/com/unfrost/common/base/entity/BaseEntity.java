@@ -101,4 +101,18 @@ public class BaseEntity extends BaseId {
     public boolean isRunning() {
         return LifeState.RUNNING.equals(lifeState);
     }
+
+    public boolean isStopped() {
+        return LifeState.STOPPED.equals(lifeState);
+    }
+
+    public LifeState beRunning() {
+        lifeState = LifeState.RUNNING;
+        return lifeState;
+    }
+
+    public LifeState beStopped() {
+        lifeState = LifeState.STOPPED;
+        return lifeState;
+    }
 }
