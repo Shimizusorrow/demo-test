@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--控制台日志配置-->
+    <property name="log.base" value="logs"/>
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+            </pattern>
+        </layout>
+    </appender>
+
+    <!--文件记录日志配置   Info-->
+    <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <param name="Encoding" value="UTF-8" />
+        <!--过滤-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+            </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--绝对路径-->
+            <!--<fileNamePattern>C:/log/info.%d.log</fileNamePattern>-->
+
+            <!--这种就是采用相对路径的方式-->
+            <fileNamePattern>log/info/info.%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <!--文件记录日志配置   Warn-->
+    <appender name="fileWarnLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <param name="Encoding" value="UTF-8" />
+        <!--过滤-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+            </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <!--<fileNamePattern>C:/log/error.%d.log</fileNamePattern>-->
+            <fileNamePattern>log/warn/warn.%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <!--文件记录日志配置   Error-->
+    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <param name="Encoding" value="UTF-8" />
+        <!--过滤-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+            </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <!--<fileNamePattern>C:/log/error.%d.log</fileNamePattern>-->
+            <fileNamePattern>log/error/error.%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="consoleLog"/>
+        <!-- 开发的时候可以使用debug配置   生成环境不要用debug   查看debug 需要将level设置成 debug-->
+        <!--<appender-ref ref="fileDebugLog"/>-->
+        <appender-ref ref="fileInfoLog"/>
+        <appender-ref ref="fileWarnLog"/>
+        <appender-ref ref="fileErrorLog"/>
+    </root>
+</configuration>
