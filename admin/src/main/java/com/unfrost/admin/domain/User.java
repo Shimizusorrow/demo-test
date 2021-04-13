@@ -21,6 +21,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import java.util.Collection;
+import java.util.Objects;
 
 /**
  * @author Shimizu
@@ -53,6 +54,9 @@ public class User extends BaseEntity implements UserDetails {
 
     @ApiModelProperty("邮箱")
     private String email = "";
+
+    @ApiModelProperty("头像图片")
+    private String avatarImage = "";
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -160,5 +164,17 @@ public class User extends BaseEntity implements UserDetails {
         this.setId(updateUserVO.getId());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        User user = (User) o;
+        return Objects.equals(username, user.username);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), username);
+    }
 }
