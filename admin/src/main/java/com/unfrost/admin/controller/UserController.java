@@ -6,6 +6,7 @@ import com.unfrost.admin.domain.User;
 import com.unfrost.admin.enums.RoleEnum;
 import com.unfrost.admin.repo.UserRepo;
 import com.unfrost.admin.service.UserService;
+import com.unfrost.admin.utils.UserUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,12 @@ import java.util.List;
 public class UserController {
     private final UserRepo userRepo;
     private final UserService userService;
+
+    @ApiOperation("获取当前登录的用户信息")
+    @GetMapping("/current")
+    public User current() {
+        return UserUtils.gainUserThrow();
+    }
 
     @ApiOperation("新增用户")
     @PostMapping("/add")
