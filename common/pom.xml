@@ -57,6 +57,13 @@
             <version>5.5.7</version>
         </dependency>
 
+        <!-- 测试使用H2数据库      -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <!-- 工具类中不进行二次打包-->
