@@ -27,13 +27,25 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/log/**").addResourceLocations("file:" + "./log/");
     }
 
+    /**
+     * 开启跨域
+     */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
+        // 设置允许跨域的路由
         registry.addMapping("/**")
 //                .exposedHeaders()
+                // 设置允许跨域请求的域名
+                .allowedOriginPatterns("*")
+                //是否允许证书
+                .allowCredentials(true)
+                // 设置允许跨域请求的头
                 .allowedHeaders("*")
-                .allowedMethods("*")
-                .allowedOrigins("*")
-                .allowCredentials(true);
+                // 设置允许的方法
+                .allowedMethods("*");
+        // 设置允许跨域请求的域名
+//                .allowedOrigins("*")
+
+
     }
 }
