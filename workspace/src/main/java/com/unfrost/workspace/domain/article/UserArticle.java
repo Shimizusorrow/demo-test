@@ -45,4 +45,9 @@ public class UserArticle extends BaseEntity {
             referencedColumnName = "id")
     private List<UserComment> comments;
 
+    public UserArticle(User author, String title, String content) {
+        this.author = author;
+        this.title = title;
+        this.content = content;
+    }
 }
