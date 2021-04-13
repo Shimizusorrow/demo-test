@@ -1,5 +1,6 @@
 package com.unfrost.common.base.entity;
 
+import cn.hutool.core.util.StrUtil;
 import jdk.nashorn.internal.objects.annotations.Getter;
 import jdk.nashorn.internal.objects.annotations.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -24,7 +25,7 @@ import java.util.UUID;
 @MappedSuperclass
 public class BaseId implements Serializable {
     @Id
-    @GenericGenerator(name = "baseIdGenerator", strategy = "org.hibernate.id.UUIDGenerator")
+    @GenericGenerator(name = "baseIdGenerator", strategy = "com.unfrost.common.util.CustomUUIDGenerator")
     @GeneratedValue(generator = "baseIdGenerator")
     @Column(length = 40)
     private String id;
@@ -58,6 +59,7 @@ public class BaseId implements Serializable {
     }
 
     public BaseId() {
-        this.id = UUID.randomUUID().toString();
+        if (this.id == null || "".equals(this.id))
+            this.id = UUID.randomUUID().toString();
     }
 }

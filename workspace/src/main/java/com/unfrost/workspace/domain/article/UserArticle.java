@@ -43,7 +43,7 @@ public class UserArticle extends BaseEntity {
     @JoinColumn(name = UserComment.PARENT_ID,
             foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT),
             referencedColumnName = "id")
-    private List<UserComment> comments;
+    private List<UserComment> comments = new ArrayList<>();
 
     public UserArticle(User author, String title, String content) {
         this.author = author;

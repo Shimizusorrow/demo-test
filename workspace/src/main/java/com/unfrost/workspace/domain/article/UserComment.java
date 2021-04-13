@@ -30,4 +30,8 @@ public class UserComment extends BaseEntry {
     @ApiModelProperty("评论内容")
     private String content;
 
+    public UserComment(User critics, String content) {
+        this.critics = critics;
+        this.content = content;
+    }
 }
