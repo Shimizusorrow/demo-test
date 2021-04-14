@@ -2,7 +2,7 @@ package com.unfrost.workspace.controller;
 
 import com.unfrost.workspace.domain.article.UserComment;
 import com.unfrost.workspace.domain.article.UserCommentDomainService;
-import com.unfrost.workspace.dto.article.AddUserCommentDTO;
+import com.unfrost.workspace.vo.article.AddUserCommentVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -24,8 +24,8 @@ public class UserArticleCommentController {
 
     @PostMapping
     @ApiOperation("对某一文章添加评论")
-    public void add(@RequestBody AddUserCommentDTO addUserCommentDTO) {
-        userCommentDomainService.add(addUserCommentDTO);
+    public void add(@RequestBody AddUserCommentVO addUserCommentVO) {
+        userCommentDomainService.add(addUserCommentVO);
     }
 
     @DeleteMapping

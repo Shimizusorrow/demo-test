@@ -1,6 +1,6 @@
-package com.unfrost.workspace.dto.article;
+package com.unfrost.workspace.vo.article;
 
-import com.unfrost.common.dto.BaseUpdateDto;
+import com.unfrost.common.vo.BaseUpdateVO;
 import com.unfrost.workspace.domain.article.UserComment;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -15,7 +15,7 @@ import java.util.List;
  * @date 2021-04-13 15:24
  */
 @Data
-public class UpdateUserArticleDTO extends BaseUpdateDto {
+public class UpdateUserArticleVO extends BaseUpdateVO {
     @ApiModelProperty("文章标题")
     private String title;
 

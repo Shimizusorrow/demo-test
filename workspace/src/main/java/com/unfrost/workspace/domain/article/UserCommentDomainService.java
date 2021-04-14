@@ -1,7 +1,7 @@
 package com.unfrost.workspace.domain.article;
 
 import com.unfrost.admin.utils.UserUtils;
-import com.unfrost.workspace.dto.article.AddUserCommentDTO;
+import com.unfrost.workspace.vo.article.AddUserCommentVO;
 import com.unfrost.workspace.repo.article.UserArticleRepo;
 import com.unfrost.workspace.repo.article.UserCommentRepo;
 import lombok.AllArgsConstructor;
@@ -24,12 +24,12 @@ public class UserCommentDomainService {
     /**
      * 新增评论
      *
-     * @param addUserCommentDTO
+     * @param addUserCommentVO
      */
     @Transactional(rollbackFor = Exception.class)
-    public void add(AddUserCommentDTO addUserCommentDTO) {
-        UserArticle article = userArticleRepo.findByIdThrow(addUserCommentDTO.getArticleId());
-        article.addComment(new UserComment(UserUtils.gainUserThrow(), addUserCommentDTO.getContent()));
+    public void add(AddUserCommentVO addUserCommentVO) {
+        UserArticle article = userArticleRepo.findByIdThrow(addUserCommentVO.getArticleId());
+        article.addComment(new UserComment(UserUtils.gainUserThrow(), addUserCommentVO.getContent()));
         userArticleRepo.save(article);
     }
 

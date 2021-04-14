@@ -2,8 +2,8 @@ package com.unfrost.workspace.controller;
 
 import com.unfrost.workspace.domain.article.UserArticle;
 import com.unfrost.workspace.domain.article.UserArticleDomainService;
-import com.unfrost.workspace.dto.article.AddUserArticleDTO;
-import com.unfrost.workspace.dto.article.UpdateUserArticleDTO;
+import com.unfrost.workspace.vo.article.AddUserArticleVO;
+import com.unfrost.workspace.vo.article.UpdateUserArticleVO;
 import com.unfrost.workspace.repo.article.UserArticleRepo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,13 +27,13 @@ public class UserArticleController {
 
     @PostMapping("/add")
     @ApiOperation("新增文章")
-    public UserArticle add(@RequestBody AddUserArticleDTO addUserArticleDTO) {
-        return userArticleDomainService.add(addUserArticleDTO);
+    public UserArticle add(@RequestBody AddUserArticleVO addUserArticleVO) {
+        return userArticleDomainService.add(addUserArticleVO);
     }
 
     @PutMapping("/update")
     @ApiOperation("更新文章")
-    public UserArticle update(@RequestBody UpdateUserArticleDTO updateUserArticleDTO) {
+    public UserArticle update(@RequestBody UpdateUserArticleVO updateUserArticleDTO) {
         return userArticleDomainService.update(updateUserArticleDTO);
     }
 

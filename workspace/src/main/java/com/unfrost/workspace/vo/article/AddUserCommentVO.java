@@ -1,4 +1,4 @@
-package com.unfrost.workspace.dto.article;
+package com.unfrost.workspace.vo.article;
 
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import lombok.Data;
  * @date 2021-04-14 09:53
  */
 @Data
-public class AddUserCommentDTO {
+public class AddUserCommentVO {
     /**
      * 文章Id
      */

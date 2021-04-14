@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.unfrost.admin.domain.User;
 import com.unfrost.common.base.entity.BaseEntity;
 import com.unfrost.common.constant.BaseEntityConstants;
-import com.unfrost.workspace.dto.article.AddUserArticleDTO;
-import com.unfrost.workspace.dto.article.UpdateUserArticleDTO;
+import com.unfrost.workspace.vo.article.AddUserArticleVO;
+import com.unfrost.workspace.vo.article.UpdateUserArticleVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -57,11 +57,11 @@ public class UserArticle extends BaseEntity {
     /**
      * 新增文章
      *
-     * @param addUserArticleDTO
+     * @param addUserArticleVO
      * @param user
      */
-    public UserArticle(AddUserArticleDTO addUserArticleDTO, User user) {
-        this(user, addUserArticleDTO.getTitle(), addUserArticleDTO.getContent());
+    public UserArticle(AddUserArticleVO addUserArticleVO, User user) {
+        this(user, addUserArticleVO.getTitle(), addUserArticleVO.getContent());
     }
 
     /**
@@ -70,7 +70,7 @@ public class UserArticle extends BaseEntity {
      * @param updateUserArticleDTO
      * @param rs
      */
-    public UserArticle(UpdateUserArticleDTO updateUserArticleDTO, UserArticle rs) {
+    public UserArticle(UpdateUserArticleVO updateUserArticleDTO, UserArticle rs) {
         this(rs.getAuthor(), updateUserArticleDTO.getTitle(), updateUserArticleDTO.getContent());
         this.setComments(updateUserArticleDTO.getComments());
         this.setId(rs.getId());

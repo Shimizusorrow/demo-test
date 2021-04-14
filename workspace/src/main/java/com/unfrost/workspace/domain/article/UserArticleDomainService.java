@@ -3,8 +3,8 @@ package com.unfrost.workspace.domain.article;
 import com.unfrost.admin.domain.User;
 import com.unfrost.admin.utils.UserUtils;
 import com.unfrost.common.base.entity.BaseEntity;
-import com.unfrost.workspace.dto.article.AddUserArticleDTO;
-import com.unfrost.workspace.dto.article.UpdateUserArticleDTO;
+import com.unfrost.workspace.vo.article.AddUserArticleVO;
+import com.unfrost.workspace.vo.article.UpdateUserArticleVO;
 import com.unfrost.workspace.repo.article.UserArticleRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,12 +26,12 @@ public class UserArticleDomainService {
     /**
      * 新增文章
      *
-     * @param addUserArticleDTO 文章DTO
+     * @param addUserArticleVO 文章DTO
      * @return UserArticle
      */
-    public UserArticle add(AddUserArticleDTO addUserArticleDTO) {
+    public UserArticle add(AddUserArticleVO addUserArticleVO) {
         User currentUser = UserUtils.gainUserThrow();
-        return userArticleRepo.save(new UserArticle(addUserArticleDTO, currentUser));
+        return userArticleRepo.save(new UserArticle(addUserArticleVO, currentUser));
     }
 
     /**
@@ -40,7 +40,7 @@ public class UserArticleDomainService {
      * @param updateUserArticleDTO 修改文章DTO
      * @return UserArticle
      */
-    public UserArticle update(UpdateUserArticleDTO updateUserArticleDTO) {
+    public UserArticle update(UpdateUserArticleVO updateUserArticleDTO) {
         UserArticle find = userArticleRepo.findByIdThrow(updateUserArticleDTO.getId());
         return userArticleRepo.save(new UserArticle(updateUserArticleDTO, find));
     }
