@@ -8,14 +8,17 @@
         <version>2.4.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.unfrost</groupId>
     <artifactId>shimizu</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>blog</name>
     <description>develop a blog</description>
+
     <properties>
         <java.version>1.8</java.version>
     </properties>
+
     <packaging>pom</packaging>
 
     <modules>
