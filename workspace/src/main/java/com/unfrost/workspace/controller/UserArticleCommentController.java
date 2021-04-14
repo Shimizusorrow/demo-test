@@ -2,7 +2,7 @@ package com.unfrost.workspace.controller;
 
 import com.unfrost.workspace.domain.article.UserComment;
 import com.unfrost.workspace.domain.article.UserCommentDomainService;
-import com.unfrost.workspace.dto.AddUserCommentDTO;
+import com.unfrost.workspace.dto.article.AddUserCommentDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;

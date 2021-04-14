@@ -2,13 +2,12 @@ package com.unfrost.workspace.controller;
 
 import com.unfrost.workspace.domain.article.UserArticle;
 import com.unfrost.workspace.domain.article.UserArticleDomainService;
-import com.unfrost.workspace.dto.AddUserArticleDTO;
-import com.unfrost.workspace.dto.UpdateUserArticleDTO;
+import com.unfrost.workspace.dto.article.AddUserArticleDTO;
+import com.unfrost.workspace.dto.article.UpdateUserArticleDTO;
 import com.unfrost.workspace.repo.article.UserArticleRepo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

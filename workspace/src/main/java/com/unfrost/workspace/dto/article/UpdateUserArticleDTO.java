@@ -1,4 +1,4 @@
-package com.unfrost.workspace.dto;
+package com.unfrost.workspace.dto.article;
 
 import com.unfrost.common.dto.BaseUpdateDto;
 import com.unfrost.workspace.domain.article.UserComment;

@@ -1,7 +1,7 @@
 package com.unfrost.workspace.domain.article;
 
 import com.unfrost.admin.utils.UserUtils;
-import com.unfrost.workspace.dto.AddUserCommentDTO;
+import com.unfrost.workspace.dto.article.AddUserCommentDTO;
 import com.unfrost.workspace.repo.article.UserArticleRepo;
 import com.unfrost.workspace.repo.article.UserCommentRepo;
 import lombok.AllArgsConstructor;

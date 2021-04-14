@@ -1,4 +1,4 @@
-package com.unfrost.workspace.dto;
+package com.unfrost.workspace.dto.article;
 
 import lombok.Data;
 

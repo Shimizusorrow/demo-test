@@ -3,15 +3,14 @@ package com.unfrost.workspace.domain.article;
 import com.unfrost.admin.domain.User;
 import com.unfrost.admin.utils.UserUtils;
 import com.unfrost.common.base.entity.BaseEntity;
-import com.unfrost.workspace.dto.AddUserArticleDTO;
-import com.unfrost.workspace.dto.UpdateUserArticleDTO;
+import com.unfrost.workspace.dto.article.AddUserArticleDTO;
+import com.unfrost.workspace.dto.article.UpdateUserArticleDTO;
 import com.unfrost.workspace.repo.article.UserArticleRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
