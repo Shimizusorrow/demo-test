@@ -9,7 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication(scanBasePackages = {
         "com.unfrost.common",
         "com.unfrost.starter",
-        "com.unfrost.admin"
+        "com.unfrost.admin",
+        "com.unfrost.workspace"
 })
 public class StarterApplication {
 

@@ -1,5 +1,7 @@
 package com.unfrost.common.base.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -31,6 +33,7 @@ public class BaseEntity extends BaseId {
      * 用于修改本次实体是否更新 更新时间
      */
     @Transient
+    @JsonIgnore
     private boolean changeCondition = true;
 
     /**

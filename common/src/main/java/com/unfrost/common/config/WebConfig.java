@@ -1,7 +1,10 @@
 package com.unfrost.common.config;
 
+import com.fasterxml.jackson.databind.Module;
+import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -46,6 +49,15 @@ public class WebConfig implements WebMvcConfigurer {
         // 设置允许跨域请求的域名
 //                .allowedOrigins("*")
 
-
     }
+
+    /**
+     * 解决了 JPA项目,查询失败,Could not write JSON: failed to lazily initialize a collection of role
+     * @return
+     */
+    @Bean
+    public Module datatypeHibernateModule() {
+        return new Hibernate5Module();
+    }
+
 }
