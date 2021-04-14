@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import java.util.Objects;
 
 /**
  * @author Shimizu
@@ -33,5 +34,19 @@ public class UserComment extends BaseEntry {
     public UserComment(User critics, String content) {
         this.critics = critics;
         this.content = content;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        UserComment that = (UserComment) o;
+        return Objects.equals(this.getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), this.getId());
     }
 }

@@ -1,5 +1,6 @@
 package com.unfrost.workspace.domain.article;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.unfrost.admin.domain.User;
 import com.unfrost.common.base.entity.BaseEntity;
 import com.unfrost.common.constant.BaseEntityConstants;
@@ -44,6 +45,7 @@ public class UserArticle extends BaseEntity {
     @JoinColumn(name = UserComment.PARENT_ID,
             foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT),
             referencedColumnName = "id")
+    @JsonIgnore
     private List<UserComment> comments = new ArrayList<>();
 
     public UserArticle(User author, String title, String content) {
@@ -72,5 +74,21 @@ public class UserArticle extends BaseEntity {
         this(rs.getAuthor(), updateUserArticleDTO.getTitle(), updateUserArticleDTO.getContent());
         this.setComments(updateUserArticleDTO.getComments());
         this.setId(rs.getId());
+    }
+
+    /**
+     * 增加评论
+     *
+     * @param userComment
+     */
+    public void addComment(UserComment userComment) {
+        this.comments.add(userComment);
+    }
+
+    /**
+     * 删除评论
+     */
+    public void rmComment(UserComment userComment) {
+        this.comments.remove(userComment);
     }
 }

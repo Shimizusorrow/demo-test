@@ -56,8 +56,8 @@ class UserCommentDomainServiceTest {
         assertNotNull(article);
         User user = entityManager.find(User.class, "1");
         UserComment comment = new UserComment(user, "一起努力!");
-        comment = entityManager.merge(comment);
-        article.getComments().add(comment);
+//        comment = entityManager.merge(comment);
+        article.addComment(comment);
         UserArticle save = entityManager.merge(article);
 
         assertEquals(1, save.getComments().size(), "评论数量不正确");
