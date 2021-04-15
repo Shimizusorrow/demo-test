@@ -29,6 +29,6 @@ public interface UserArticleRepo extends JpaRepository<UserArticle, String> {
      * @return
      */
     @Query(nativeQuery = true,
-            value = "select * from user_article ua where ua.life_state = 'RUNNING'")
+            value = "select * from user_article ua where ua.life_state = 'RUNNING' order by ua.update_time ")
     List<UserArticle> findList();
 }

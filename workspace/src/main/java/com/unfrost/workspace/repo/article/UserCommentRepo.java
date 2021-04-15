@@ -30,7 +30,7 @@ public interface UserCommentRepo extends JpaRepository<UserComment, String> {
      * @return
      */
     @Query(nativeQuery = true,
-            value = "select * from user_comment uc where uc.parent_id = :id and uc.life_state ='RUNNING'")
+            value = "select * from user_comment uc where uc.parent_id = :id and uc.life_state ='RUNNING' order by uc.create_time")
     List<UserComment> findByArticleId(String id);
 
     /**
@@ -40,6 +40,6 @@ public interface UserCommentRepo extends JpaRepository<UserComment, String> {
      * @return
      */
     @Query(nativeQuery = true,
-            value = "select * from user_comment uc where uc.critics_id = :id and uc.life_state='RUNNING'")
+            value = "select * from user_comment uc where uc.critics_id = :id and uc.life_state='RUNNING' order by uc.create_time")
     List<UserComment> findByCriticId(String id);
 }
