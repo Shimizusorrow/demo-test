@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Shimizu
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @AllArgsConstructor
+@Transactional(rollbackFor = Exception.class)
 public class FileMapperDomainService {
     private final FileMapperRepo fileMapperRepo;
 
@@ -26,5 +28,11 @@ public class FileMapperDomainService {
     @EventListener
     public void when(UpLoadFileEvent event) {
         fileMapperRepo.save(event.getMapper());
+    }
+
+    public FileMapper update(String id, String name) {
+        FileMapper fileMapper = fileMapperRepo.findByIdThrow(id);
+        fileMapper.updateName(name);
+        return fileMapperRepo.save(fileMapper);
     }
 }

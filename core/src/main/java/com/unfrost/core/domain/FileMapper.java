@@ -1,6 +1,7 @@
 package com.unfrost.core.domain;
 
 import com.unfrost.common.base.entity.BaseEntity;
+import com.unfrost.common.exception.BusinessException;
 import com.unfrost.core.enums.FileEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -44,4 +45,20 @@ public class FileMapper extends BaseEntity {
         this.mapperName = mapperName;
         this.category = category;
     }
+
+    /**
+     * 修改文件名称
+     *
+     * @param name
+     */
+    public void updateName(String name) {
+        if (null == name || "".equals(name)) {
+            throw new BusinessException("修改的名称不能为空!");
+        }
+        String trimName = name.trim();
+        if (!this.realName.equals(trimName)) {
+            this.realName = trimName;
+        }
+    }
+
 }
