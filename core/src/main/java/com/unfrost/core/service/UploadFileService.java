@@ -39,7 +39,7 @@ public class UploadFileService {
      * @return 上传的文件ID
      */
     public String uploadImage(MultipartFile file) {
-        return uploadFile(file, FileEnum.FILE);
+        return uploadFile(file, FileEnum.IMAGE);
     }
 
     /**
@@ -59,7 +59,7 @@ public class UploadFileService {
      * @return 上传的文件ID
      */
     public String uploadFile(MultipartFile file) {
-        return uploadFile(file, FileEnum.IMAGE);
+        return uploadFile(file, FileEnum.FILE);
     }
 
     /**
