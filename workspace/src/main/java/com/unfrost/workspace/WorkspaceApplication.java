@@ -6,7 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication(scanBasePackages = {
         "com.unfrost.common",
         "com.unfrost.admin",
-        "com.unfrost.workspace"
+        "com.unfrost.workspace",
+        "com.unfrost.core"
 })
 public class WorkspaceApplication {
 
