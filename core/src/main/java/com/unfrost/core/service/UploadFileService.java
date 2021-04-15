@@ -72,11 +72,7 @@ public class UploadFileService {
     private String uploadFile(MultipartFile file, FileEnum category) {
         String filename = getOriginalFilename(file);
         String mapperName = getMapperName(filename, getUUIDName());
-        FileMapper mapper = findByRealNameAndCategory(filename, category);
-        if (Objects.isNull(mapper)) {
-            mapper = new FileMapper(UUID.randomUUID().toString(), filename, mapperName, category);
-        }
-        mapper.setMapperName(mapperName);
+        FileMapper mapper = new FileMapper(UUID.randomUUID().toString(), filename, mapperName, category);
         publisher.publishEvent(new UpLoadFileEvent(mapper));
         UploadUtils.upLoadFile(file, getFilePath(category), mapperName);
         return mapper.getId();

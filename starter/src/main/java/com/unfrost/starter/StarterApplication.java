@@ -10,7 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
         "com.unfrost.common",
         "com.unfrost.starter",
         "com.unfrost.admin",
-        "com.unfrost.workspace"
+        "com.unfrost.workspace",
+        "com.unfrost.core"
 })
 public class StarterApplication {
 
