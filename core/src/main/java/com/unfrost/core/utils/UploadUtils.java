@@ -1,4 +1,4 @@
-package com.unfrost.common.util;
+package com.unfrost.core.utils;
 
 import com.unfrost.common.exception.BusinessException;
 import org.slf4j.Logger;
@@ -21,9 +21,9 @@ public class UploadUtils {
     /**
      * 上传文件
      *
-     * @param file
-     * @param destPath
-     * @param filename
+     * @param file     需要上传的文件
+     * @param destPath 文件保存的地址
+     * @param filename 文件的名称
      */
     public static void upLoadFile(MultipartFile file, String destPath, String filename) {
         File dest = new File(destPath, filename);
