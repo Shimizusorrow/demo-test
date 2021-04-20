@@ -1,8 +1,10 @@
 pipeline {
-    agent {
-        // 只部署在 master 节点上
-        label 'master'
-    }
+//     agent {
+//         // 只部署在 master 节点上
+//         label 'master'
+//     }
+agent{
+}
     tools{
         maven 'maven'
     }
