@@ -75,12 +75,17 @@
 
 // 快速开始
 pipeline {
-//     agent { docker 'maven:3.3.3' }
+    agent any
     stages {
-        stage('build') {
+        stage('Example') {
             steps {
-                sh 'mvn --version'
+                echo 'Hello World'
             }
+        }
+    }
+    post {
+        always {
+            echo 'I will ........!'
         }
     }
 }
