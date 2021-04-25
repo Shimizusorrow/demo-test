@@ -90,22 +90,38 @@
 //     }
 // }
 // 测试二
+// pipeline {
+//     agent any
+//     stages {
+//         stage('Example Build') {
+//             agent  any
+//             steps {
+//                 echo 'Hello, Maven'
+//                 sh 'mvn --version'
+//             }
+//         }
+//         stage('Example Test') {
+//             agent  any
+//             steps {
+//                 echo 'Hello, JDK'
+//                 sh 'java -version'
+//             }
+//         }
+//     }
+// }
+
 pipeline {
     agent any
     stages {
-        stage('Example Build') {
-            agent  any
+        stage('Example') {
             steps {
-                echo 'Hello, Maven'
-                sh 'mvn --version'
+                echo 'Hello World'
             }
         }
-        stage('Example Test') {
-            agent  any
-            steps {
-                echo 'Hello, JDK'
-                sh 'java -version'
-            }
+    }
+    post {
+        always {
+            echo 'I will always say Hello again!'
         }
     }
 }
