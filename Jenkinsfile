@@ -74,18 +74,38 @@
 //
 
 // 快速开始
+// pipeline {
+//     agent any
+//     stages {
+//         stage('Example') {
+//             steps {
+//                 echo 'Hello World'
+//             }
+//         }
+//     }
+//     post {
+//         always {
+//             echo 'I will ........!'
+//         }
+//     }
+// }
+// 测试二
 pipeline {
-    agent any
+    agent none
     stages {
-        stage('Example') {
+        stage('Example Build') {
+            agent { docker 'maven:3-alpine' }
             steps {
-                echo 'Hello World'
+                echo 'Hello, Maven'
+                sh 'mvn --version'
             }
         }
-    }
-    post {
-        always {
-            echo 'I will ........!'
+        stage('Example Test') {
+            agent { docker 'openjdk:8-jre' }
+            steps {
+                echo 'Hello, JDK'
+                sh 'java -version'
+            }
         }
     }
 }
