@@ -109,19 +109,33 @@
 //         }
 //     }
 // }
+// post
+// pipeline {
+//     agent any
+//     stages {
+//         stage('Example') {
+//             steps {
+//                 echo 'Hello World'
+//             }
+//         }
+//     }
+//     post {
+//         always {
+//             echo 'I will always say Hello again!'
+//         }
+//     }
+// }
 
 pipeline {
     agent any
+    tools {
+        maven 'apache-maven-3.0.1'
+    }
     stages {
         stage('Example') {
             steps {
-                echo 'Hello World'
+                sh 'mvn --version'
             }
-        }
-    }
-    post {
-        always {
-            echo 'I will always say Hello again!'
         }
     }
 }
