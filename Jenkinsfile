@@ -129,7 +129,7 @@
 pipeline {
     agent any
     tools {
-        maven 'apache-maven-3.6.3'
+        maven 'MAVEN_HOME'
     }
     stages {
         stage('Example') {
