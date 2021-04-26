@@ -31,7 +31,7 @@ class UserDomainServiceTest {
     }
 
     @Test
-    void find(){
+    void findUserInfo(){
         userRepo.save(new User("1","1", RoleEnum.ADMIN, GenderEnum.MALE,"1"));
         List<UserInfoDTO> userInfo = userRepo.findUserInfo();
         assertEquals("1",userInfo.get(0).getName());

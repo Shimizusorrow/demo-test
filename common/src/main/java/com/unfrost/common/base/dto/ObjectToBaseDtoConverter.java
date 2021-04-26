@@ -10,16 +10,16 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * BaseDTO转换器
+ *
  * @author Curtain
  * @date 2019/11/14 12:22
- * @deprecated DTO 转换将被废弃
  */
-public final class ObjectToCustomerDtoConverter<T extends BaseDTO>
-        implements Converter<Object, T> {
-    private final static Logger log = LoggerFactory.getLogger(ObjectToCustomerDtoConverter.class);
+public final class ObjectToBaseDtoConverter<T extends BaseDTO> implements Converter<Object, T> {
+    private final static Logger log = LoggerFactory.getLogger(ObjectToBaseDtoConverter.class);
     private Class<T> target;
 
-    public ObjectToCustomerDtoConverter(Class<T> target) {
+    public ObjectToBaseDtoConverter(Class<T> target) {
         this.target = target;
     }
 
@@ -29,9 +29,8 @@ public final class ObjectToCustomerDtoConverter<T extends BaseDTO>
         try {
             rs = (T) Class.forName(target.getName()).newInstance();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(String.format("BaseDTO类型转换失败!:[%s]", e.getMessage()));
             throw new RuntimeException("无法生成目标类型实例");
-
         }
         Map<String, Object> map = (Map) from;
 
@@ -60,35 +59,45 @@ public final class ObjectToCustomerDtoConverter<T extends BaseDTO>
                 field = cls.getDeclaredField(key);
             } catch (NoSuchFieldException e) {
 //                修改后可以将未知属性不赋值
-//                e.printStackTrace();
                 log.info(String.format("没有找到匹配的属性:[%s]", key));
 //                throw new RuntimeException("没有找到匹配属性:" + key);
             }
             if (Objects.nonNull(field)) {
                 Class<?> type = field.getType();
-                Object data;
-                // TODO: 2020-03-26 增加异常处理  解析失败。
-                data = type.equals(String.class) ? value :
-                        type.equals(Integer.class) ? (value == null ? 0 : Integer.valueOf(value)) :
-                                type.equals(int.class) ? (value == null ? 0 : Integer.valueOf(value)) :
-                                        type.equals(long.class) ? (value == null ? 0 : Long.valueOf(value)) :
-                                                type.equals(Long.class) ? (value == null ? 0 : Long.valueOf(value)) :
-                                                        Enum.class.isAssignableFrom(type) ? (value != null ? Enum.valueOf((Class<Enum>) type, value) : null) :
-                                                                type.equals(Double.class) ? (value == null ? 0 : Double.valueOf(value)) :
-                                                                        null;
+                Object data = typeConversion(type, value);
                 Method fieldSetMet = getSetMethod(cls, key);
                 try {
                     fieldSetMet.invoke(rs, data);
                 } catch (Exception e) {
-                    //                修改后可以将未知属性不赋值
-//                e.printStackTrace();
+//                修改后可以将未知属性不赋值
                     log.info(String.format("没有找到匹配的属性:[%s]", key));
 //                throw new RuntimeException("没有找到匹配属性:" + key);
                 }
             }
         }
+    }
 
-
+    /**
+     * @param type  数据类型判断
+     * @param value String类型值
+     * @return 对应类型的值
+     */
+    private static Object typeConversion(Class<?> type, String value) {
+        if (value == null) {
+            return null;
+        }
+        if (String.class.equals(type)) {
+            return value;
+        } else if (Integer.class.equals(type) || int.class.equals(type)) {
+            return Integer.parseInt(value);
+        } else if (Long.class.equals(type) || long.class.equals(type)) {
+            return Long.parseLong(value);
+        } else if (Double.class.equals(type) || double.class.equals(type)) {
+            return Double.parseDouble(value);
+        } else if (Enum.class.isAssignableFrom(type)) {
+            return Enum.valueOf((Class<Enum>) type, value);
+        }
+        return null;
     }
 
     /**
@@ -109,7 +118,6 @@ public final class ObjectToCustomerDtoConverter<T extends BaseDTO>
             sb.append(fieldName.substring(1));
             return objectClass.getMethod(sb.toString(), parameterTypes);
         } catch (Exception e) {
-            //            e.printStackTrace();
             log.info("没有找到目标类 属性" + fieldName + "的set方法");
             return null;
             //throw new RuntimeException("没有找到目标类 属性" + fieldName + "set方法");

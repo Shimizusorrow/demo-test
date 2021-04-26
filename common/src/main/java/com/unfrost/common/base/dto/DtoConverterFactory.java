@@ -10,6 +10,6 @@ public class DtoConverterFactory implements ConverterFactory<Object, BaseDTO> {
 
     @Override
     public <T extends BaseDTO> Converter<Object, T> getConverter(Class<T> targetType) {
-        return new ObjectToCustomerDtoConverter<>(targetType);
+        return new ObjectToBaseDtoConverter<>(targetType);
     }
 }
