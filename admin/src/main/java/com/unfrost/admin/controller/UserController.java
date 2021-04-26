@@ -3,6 +3,7 @@ package com.unfrost.admin.controller;
 import com.unfrost.admin.domain.AddUserVO;
 import com.unfrost.admin.domain.UpdateUserVO;
 import com.unfrost.admin.domain.User;
+import com.unfrost.admin.dto.UserInfoDTO;
 import com.unfrost.admin.enums.RoleEnum;
 import com.unfrost.admin.repo.UserRepo;
 import com.unfrost.admin.service.UserService;
@@ -62,6 +63,12 @@ public class UserController {
     @GetMapping("/person")
     public User find(@RequestParam String id) {
         return userRepo.findByIdThrow(id);
+    }
+
+    @ApiOperation(value = "用户信息展示", notes = "for-front")
+    @GetMapping("/front/person")
+    public List<UserInfoDTO> find() {
+        return userRepo.findUserInfo();
     }
 
     @ApiOperation("登录已过期")

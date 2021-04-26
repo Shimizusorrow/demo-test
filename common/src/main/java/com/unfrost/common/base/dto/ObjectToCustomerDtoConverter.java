@@ -14,7 +14,7 @@ import java.util.Objects;
  * @date 2019/11/14 12:22
  * @deprecated DTO 转换将被废弃
  */
-public class ObjectToCustomerDtoConverter<T extends BaseDTO>
+public final class ObjectToCustomerDtoConverter<T extends BaseDTO>
         implements Converter<Object, T> {
     private final static Logger log = LoggerFactory.getLogger(ObjectToCustomerDtoConverter.class);
     private Class<T> target;

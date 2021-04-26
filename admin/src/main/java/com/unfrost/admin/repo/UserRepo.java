@@ -1,6 +1,7 @@
 package com.unfrost.admin.repo;
 
 import com.unfrost.admin.domain.User;
+import com.unfrost.admin.dto.UserInfoDTO;
 import com.unfrost.admin.enums.RoleEnum;
 import com.unfrost.common.exception.BusinessException;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -71,9 +72,13 @@ public interface UserRepo extends JpaRepository<User, String> {
      */
     boolean existsByUsername(String username);
 
-    default void existsByUsernameThrow(String username){
+    default void existsByUsernameThrow(String username) {
         if (existsByUsername(username)) {
             throw new BusinessException("账号已存在!");
         }
     }
+
+    @Query(nativeQuery = true,
+            value = "select u.name as name from user u ")
+    List<UserInfoDTO> findUserInfo();
 }

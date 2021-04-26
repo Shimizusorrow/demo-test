@@ -1,10 +1,11 @@
 package com.unfrost.common.base.dto;
 
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.converter.ConverterFactory;
 
-@Configuration
+/**
+ * @author Administrator
+ */
 public class DtoConverterFactory implements ConverterFactory<Object, BaseDTO> {
 
     @Override
