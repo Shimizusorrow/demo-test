@@ -4,10 +4,12 @@ import com.unfrost.admin.domain.AddUserVO;
 import com.unfrost.admin.domain.UpdateUserVO;
 import com.unfrost.admin.domain.User;
 import com.unfrost.admin.dto.UserInfoDTO;
+import com.unfrost.admin.domain.UserMapper;
 import com.unfrost.admin.enums.RoleEnum;
 import com.unfrost.admin.repo.UserRepo;
 import com.unfrost.admin.service.UserService;
 import com.unfrost.admin.utils.UserUtils;
+import com.unfrost.common.vo.ResultVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -15,6 +17,7 @@ import lombok.Data;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Shimizu
@@ -28,6 +31,7 @@ import java.util.List;
 public class UserController {
     private final UserRepo userRepo;
     private final UserService userService;
+    private final UserMapper mapper;
 
     @ApiOperation("获取当前登录的用户信息")
     @GetMapping("/current")
@@ -55,14 +59,16 @@ public class UserController {
 
     @ApiOperation("查询所有用户-列表")
     @GetMapping
-    public List<User> list() {
-        return userRepo.findAllRunning();
+    public List<UserInfoDTO> list() {
+        return userRepo.findAllRunning().stream()
+                .map(mapper::infoDtoTransform)
+                .collect(Collectors.toList());
     }
 
     @ApiOperation("查询单个用户")
     @GetMapping("/person")
-    public User find(@RequestParam String id) {
-        return userRepo.findByIdThrow(id);
+    public UserInfoDTO find(@RequestParam String id) {
+        return mapper.infoDtoTransform(userRepo.findByIdThrow(id));
     }
 
     @ApiOperation(value = "用户信息展示", notes = "for-front")
@@ -77,19 +83,4 @@ public class UserController {
         return ResultVO.error();
     }
 
-    @Data
-    private static class ResultVO {
-        private String message;
-        private String code;
-        private static ResultVO resultVO = null;
-
-        public static ResultVO error() {
-            if (resultVO == null) {
-                resultVO = new ResultVO();
-                resultVO.setCode("412");
-                resultVO.setMessage("登录超时,请重新登录!");
-            }
-            return resultVO;
-        }
-    }
 }
