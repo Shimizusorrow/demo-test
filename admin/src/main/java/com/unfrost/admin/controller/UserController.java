@@ -10,11 +10,12 @@ import com.unfrost.admin.repo.UserRepo;
 import com.unfrost.admin.service.UserService;
 import com.unfrost.admin.utils.UserUtils;
 import com.unfrost.common.vo.ResultVO;
+import com.unfrost.core.service.UploadFileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,6 +32,8 @@ import java.util.stream.Collectors;
 public class UserController {
     private final UserRepo userRepo;
     private final UserService userService;
+    private final UserMapper userMapper;
+    private final UploadFileService uploadFileService;
 
 
     @ApiOperation("获取当前登录的用户信息")
@@ -61,14 +64,14 @@ public class UserController {
     @GetMapping
     public List<UserInfoDTO> list() {
         return userRepo.findAllRunning().stream()
-                .map(UserMapper.INSTANCE::infoDtoTransform)
+                .map(userMapper::infoDtoTransform)
                 .collect(Collectors.toList());
     }
 
     @ApiOperation("查询单个用户")
     @GetMapping("/person")
     public UserInfoDTO find(@RequestParam String id) {
-        return UserMapper.INSTANCE.infoDtoTransform(userRepo.findByIdThrow(id));
+        return userMapper.infoDtoTransform(userRepo.findByIdThrow(id));
     }
 
     @ApiOperation(value = "用户信息展示", notes = "for-front")
@@ -81,6 +84,15 @@ public class UserController {
     @GetMapping("/time-out")
     public ResultVO sessionTimeOut() {
         return ResultVO.error();
+    }
+
+    @ApiOperation("上传用户的图片")
+    @PutMapping("/upload-image")
+    public UserInfoDTO uploadImg(@RequestParam String id, @RequestPart("file") MultipartFile file) {
+        User find = userRepo.findByIdThrow(id);
+        String image = uploadFileService.uploadImage(file);
+        find.updateAvatarImage(image);
+        return userMapper.infoDtoTransform(find);
     }
 
 }

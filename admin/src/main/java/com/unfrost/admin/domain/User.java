@@ -177,4 +177,16 @@ public class User extends BaseEntity implements UserDetails {
     public int hashCode() {
         return Objects.hash(super.hashCode(), username);
     }
+
+    /**
+     * 更新图片
+     *
+     * @param image
+     */
+    public void updateAvatarImage(String image) {
+        if (StrUtil.isNotBlank(image)) {
+            throw new BusinessException("图片不许为空或者空白字符串!");
+        }
+        avatarImage = avatarImage.equals(image) ? avatarImage : image;
+    }
 }

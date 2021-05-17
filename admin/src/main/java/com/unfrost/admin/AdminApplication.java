@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication(scanBasePackages = {
         "com.unfrost.common",
-        "com.unfrost.admin",
-        "com.unfrost.core"
+        "com.unfrost.core",
+        "com.unfrost.admin"
 })
 public class AdminApplication {
 
