@@ -64,35 +64,8 @@
             <artifactId>mapstruct-processor</artifactId>
             <version>${org.mapstruct.version}</version>
         </dependency>
-
-
     </dependencies>
 
-
-    <!-- 工具类中不进行二次打包-->
-    <!--    <build>-->
-    <!--        <plugins>-->
-    <!--            <plugin>-->
-    <!--                <groupId>org.springframework.boot</groupId>-->
-    <!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-    <!--                <configuration>-->
-    <!--                    <classifier>exec</classifier>-->
-    <!--                </configuration>-->
-    <!--            </plugin>-->
-    <!--        </plugins>-->
-    <!--    </build>-->
-    <!--    不配置主类想获得一个不可直接java -jar执行的jar包 就配置layout=NONE-->
-    <!--    <build>-->
-    <!--        <plugins>-->
-    <!--            <plugin>-->
-    <!--                <groupId>org.springframework.boot</groupId>-->
-    <!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-    <!--                <configuration>-->
-    <!--                    <layout>NONE</layout>-->
-    <!--                </configuration>-->
-    <!--            </plugin>-->
-    <!--        </plugins>-->
-    <!--    </build>-->
     <build>
         <plugins>
             <plugin>

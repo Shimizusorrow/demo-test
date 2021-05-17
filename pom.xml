@@ -24,6 +24,7 @@
 
     <modules>
         <module>starter</module>
+        <module>core</module>
         <module>common</module>
         <module>admin</module>
         <module>workspace</module>
@@ -59,14 +60,14 @@
                 <version>2.4.2</version>
             </plugin>
 
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>${dockerfile.version}</version>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>com.spotify</groupId>-->
+<!--                <artifactId>dockerfile-maven-plugin</artifactId>-->
+<!--                <version>${dockerfile.version}</version>-->
+<!--                <configuration>-->
+<!--                    <skip>true</skip>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 

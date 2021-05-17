@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 public class UserController {
     private final UserRepo userRepo;
     private final UserService userService;
-    private final UserMapper mapper;
+
 
     @ApiOperation("获取当前登录的用户信息")
     @GetMapping("/current")
@@ -61,14 +61,14 @@ public class UserController {
     @GetMapping
     public List<UserInfoDTO> list() {
         return userRepo.findAllRunning().stream()
-                .map(mapper::infoDtoTransform)
+                .map(UserMapper.INSTANCE::infoDtoTransform)
                 .collect(Collectors.toList());
     }
 
     @ApiOperation("查询单个用户")
     @GetMapping("/person")
     public UserInfoDTO find(@RequestParam String id) {
-        return mapper.infoDtoTransform(userRepo.findByIdThrow(id));
+        return UserMapper.INSTANCE.infoDtoTransform(userRepo.findByIdThrow(id));
     }
 
     @ApiOperation(value = "用户信息展示", notes = "for-front")
